@@ -20,9 +20,20 @@ public class ProductUseCase implements ProductService {
                 this.productRepository.createProduct(product));
     }
 
+    @Override
+    public Mono<Product> deleteProductByIdAndStoreId(String storeId, String productId) {
+        return productRepository.findProductByIdAndStoreId(productId, storeId)
+                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS02)))
+                .flatMap(product ->
+                        productRepository.deleteProductProduct(product)
+                                .thenReturn(product)
+                );
+    }
+
+
     private Mono<Void> validateUniqueProduct(String name) {
         return productRepository.findProductByName(name)
-                .flatMap(franchise -> Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS01)))
+                .flatMap(product -> Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS01)))
                 .then();
     }
 }

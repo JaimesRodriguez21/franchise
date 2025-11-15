@@ -32,4 +32,15 @@ public class ProductRepositoryAdapter extends AdapterOperations<Product, Product
         return repository.findByNameIgnoreCase(name)
                 .map(doc -> mapper.map(doc, Product.class));
     }
+
+    @Override
+    public Mono<Void> deleteProductProduct(Product product) {
+        return repository.delete(mapper.map(product, ProductDocument.class));
+    }
+
+    @Override
+    public Mono<Product> findProductByIdAndStoreId(String storeId, String productId) {
+        return repository.findProductDocumentByIdAndStoreId(productId, storeId)
+                .map(doc -> mapper.map(doc, Product.class));
+    }
 }

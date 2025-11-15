@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface ProductService {
     Mono<Product> createProduct(Product product);
+    Mono<Product> deleteProductByIdAndStoreId(String storeId, String productId);
 }

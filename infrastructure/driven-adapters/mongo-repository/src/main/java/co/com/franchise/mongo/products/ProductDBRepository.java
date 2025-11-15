@@ -7,4 +7,6 @@ import reactor.core.publisher.Mono;
 
 public interface ProductDBRepository extends ReactiveMongoRepository<ProductDocument, String>, ReactiveQueryByExampleExecutor<ProductDocument> {
     Mono<Product> findByNameIgnoreCase(String name);
+
+    Mono<Product> findProductDocumentByIdAndStoreId(String storeId, String productId);
 }

@@ -29,4 +29,17 @@ public class StoreHandler {
                                 .bodyValue(response)
                 );
     }
+
+    public Mono<ServerResponse> deleteProductFromStore(ServerRequest request) {
+        String storeId = request.pathVariable("storeId");
+        String productId = request.pathVariable("productId");
+
+        return storeService.deleteProductFromStore(storeId, productId)
+                .map(productMapper::toResponse)
+                .flatMap(response ->
+                        ServerResponse.ok()
+                                .bodyValue(response)
+                );
+    }
+
 }

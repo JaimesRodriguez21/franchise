@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Component
@@ -15,7 +16,10 @@ public class StoreRest {
     @Bean
     public RouterFunction<ServerResponse> storeRoutes(StoreHandler handler) {
         return route()
-                .POST("/stores/{storeId}/products", handler::addProductToStore)
+                .nest(path("/stores"), builder -> builder
+                        .POST("/{storeId}/products", handler::addProductToStore)
+                        .DELETE("/{storeId}/products/{productId}", handler::deleteProductFromStore)
+                )
                 .build();
     }
 }
