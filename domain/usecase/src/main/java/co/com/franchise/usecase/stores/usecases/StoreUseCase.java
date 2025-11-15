@@ -35,8 +35,16 @@ public class StoreUseCase implements StoreService {
     public Mono<Product> deleteProductFromStore(String storeId, String productId) {
         return storeRepository.findById(storeId)
                 .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01STOR02)))
-                .flatMap(product -> productService.deleteProductByIdAndStoreId(productId, storeId));
+                .flatMap(store -> productService.deleteProductByIdAndStoreId(productId, store.getId()));
     }
+
+    @Override
+    public Mono<Product> updateProductStock(String storeId, String productId, int newStock) {
+        return storeRepository.findById(storeId)
+                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01STOR02)))
+                .flatMap(store -> productService.updateProductByIdAndStoreId(storeId, productId, newStock));
+    }
+
 
     private Mono<Void> validateUniqueStore(String name) {
         return storeRepository.findStoreByName(name)

@@ -18,6 +18,7 @@ public class StoreRest {
         return route()
                 .nest(path("/stores"), builder -> builder
                         .POST("/{storeId}/products", handler::addProductToStore)
+                        .PUT("/{storeId}/products/{productId}", handler::updateProductStock)
                         .DELETE("/{storeId}/products/{productId}", handler::deleteProductFromStore)
                 )
                 .build();

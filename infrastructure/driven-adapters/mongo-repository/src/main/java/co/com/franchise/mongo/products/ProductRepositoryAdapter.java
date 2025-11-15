@@ -20,11 +20,19 @@ public class ProductRepositoryAdapter extends AdapterOperations<Product, Product
         super(repository, mapper, d -> mapper.map(d, Product.class));
     }
 
+    private Mono<Product> saveProduct(Product product) {
+        return repository.save(mapper.map(product, ProductDocument.class))
+                .map(doc -> mapper.map(doc, Product.class));
+    }
 
     @Override
     public Mono<Product> createProduct(Product product) {
-        return repository.save(mapper.map(product, ProductDocument.class))
-                .map(doc -> mapper.map(doc, Product.class));
+        return saveProduct(product);
+    }
+
+    @Override
+    public Mono<Product> updateProduct(Product product) {
+        return saveProduct(product);
     }
 
     @Override

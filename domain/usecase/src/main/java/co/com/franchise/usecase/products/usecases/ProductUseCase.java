@@ -30,6 +30,15 @@ public class ProductUseCase implements ProductService {
                 );
     }
 
+    @Override
+    public Mono<Product> updateProductByIdAndStoreId(String productId, String storeId, int newStock) {
+        return productRepository.findProductByIdAndStoreId(productId, storeId)
+                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS02)))
+                .flatMap(product -> {
+                    product.setStock(newStock);
+                    return productRepository.updateProduct(product);
+                });
+    }
 
     private Mono<Void> validateUniqueProduct(String name) {
         return productRepository.findProductByName(name)
