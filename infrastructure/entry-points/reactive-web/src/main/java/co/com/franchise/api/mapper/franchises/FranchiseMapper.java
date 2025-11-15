@@ -1,4 +1,4 @@
-package co.com.franchise.api.mapper;
+package co.com.franchise.api.mapper.franchises;
 
 import co.com.franchise.api.dtos.requests.franchises.FranchiseRequest;
 import co.com.franchise.api.dtos.responses.franchises.FranchiseResponse;

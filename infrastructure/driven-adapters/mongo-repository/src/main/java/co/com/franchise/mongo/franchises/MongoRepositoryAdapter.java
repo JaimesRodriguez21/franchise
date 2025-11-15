@@ -1,19 +1,18 @@
-package co.com.franchise.mongo;
+package co.com.franchise.mongo.franchises;
 
 import co.com.franchise.model.franchise.Franchise;
 import co.com.franchise.model.franchise.gateways.FranchiseRepository;
-import co.com.franchise.mongo.documents.FranchiseDocument;
 import co.com.franchise.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class MongoRepositoryAdapter extends AdapterOperations<Franchise, FranchiseDocument, String, MongoDBRepository>
+public class MongoRepositoryAdapter extends AdapterOperations<Franchise, FranchiseDocument, String, FranchiseDBRepository>
  implements FranchiseRepository
 {
 
-    public MongoRepositoryAdapter(MongoDBRepository repository, ObjectMapper mapper) {
+    public MongoRepositoryAdapter(FranchiseDBRepository repository, ObjectMapper mapper) {
         /**
          *  Could be use mapper.mapBuilder if your domain model implement builder pattern
          *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());

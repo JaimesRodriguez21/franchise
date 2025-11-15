@@ -1,13 +1,14 @@
-package co.com.franchise.mongo.documents;
+package co.com.franchise.mongo.store;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(value = "franchises")
-public class FranchiseDocument {
+@Document(value = "stores")
+public class StoreDocument {
     @Id
     private String id;
     private String name;
+    private String franchiseId;
 }

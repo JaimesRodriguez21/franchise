@@ -1,4 +1,4 @@
-package co.com.franchise.usecase.franchise.exception;
+package co.com.franchise.usecase.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
