@@ -1,4 +1,4 @@
-package co.com.franchise.mongo.store;
+package co.com.franchise.mongo.stores;
 
 
 import co.com.franchise.model.store.Store;

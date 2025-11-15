@@ -13,7 +13,9 @@ public enum ExceptionCodeEnum {
     C01STOR01("C01STOR01", "Store already exists"),
     C01STOR02("C01STOR02", "Store not found"),
 
-
+    // products
+    C01PDTS01("C01PDTS01", "Product already exists"),
+    C01PDTS02("C01PDTS02", "Product not found"),
     ;
 
 

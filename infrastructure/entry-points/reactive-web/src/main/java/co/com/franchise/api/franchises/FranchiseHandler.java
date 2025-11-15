@@ -4,7 +4,7 @@ import co.com.franchise.api.dtos.requests.franchises.FranchiseRequest;
 import co.com.franchise.api.dtos.requests.stores.StoreRequest;
 import co.com.franchise.api.mapper.franchises.FranchiseMapper;
 import co.com.franchise.api.mapper.stores.StoreMapper;
-import co.com.franchise.usecase.franchise.services.FranchiseService;
+import co.com.franchise.usecase.franchises.services.FranchiseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

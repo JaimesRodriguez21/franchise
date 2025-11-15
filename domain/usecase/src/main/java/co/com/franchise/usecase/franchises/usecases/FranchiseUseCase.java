@@ -1,12 +1,12 @@
-package co.com.franchise.usecase.franchise.usecases;
+package co.com.franchise.usecase.franchises.usecases;
 
 import co.com.franchise.model.franchise.Franchise;
 import co.com.franchise.model.franchise.gateways.FranchiseRepository;
 import co.com.franchise.model.store.Store;
 import co.com.franchise.usecase.enums.ExceptionCodeEnum;
-import co.com.franchise.usecase.exception.BusinessException;
-import co.com.franchise.usecase.franchise.services.FranchiseService;
-import co.com.franchise.usecase.store.services.StoreService;
+import co.com.franchise.usecase.exceptions.BusinessException;
+import co.com.franchise.usecase.franchises.services.FranchiseService;
+import co.com.franchise.usecase.stores.services.StoreService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
@@ -21,11 +21,6 @@ public class FranchiseUseCase implements FranchiseService {
     public Mono<Franchise> createFranchise(Franchise franchise) {
         return this.validateUniqueFranchise(franchise.getName()).then(
                 this.franchiseRepository.createFranchise(franchise));
-    }
-
-    @Override
-    public Mono<Franchise> findById(String id) {
-        return franchiseRepository.findById(id);
     }
 
     @Override

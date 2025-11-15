@@ -1,8 +1,8 @@
 package co.com.franchise.api.exception;
 
 import co.com.franchise.api.dtos.responses.utils.ErrorResponse;
-import co.com.franchise.usecase.exception.BusinessException;
-import co.com.franchise.usecase.exception.NotFoundException;
+import co.com.franchise.usecase.exceptions.BusinessException;
+import co.com.franchise.usecase.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

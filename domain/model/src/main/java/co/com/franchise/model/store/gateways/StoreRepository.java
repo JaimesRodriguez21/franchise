@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 
 public interface StoreRepository {
     Mono<Store> createStore(Store store);
-
+    Mono<Store> findById(String id);
     Mono<Store> findStoreByName(String name);
 
 }
