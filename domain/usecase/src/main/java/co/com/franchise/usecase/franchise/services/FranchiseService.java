@@ -1,10 +1,8 @@
-package co.com.franchise.model.franchise.gateways;
+package co.com.franchise.usecase.franchise.services;
 
 import co.com.franchise.model.franchise.Franchise;
 import reactor.core.publisher.Mono;
 
-public interface FranchiseRepository {
+public interface FranchiseService {
     Mono<Franchise> createFranchise(Franchise franchise);
-    Mono<Franchise> findFranchiseByName(String name);
-
 }
