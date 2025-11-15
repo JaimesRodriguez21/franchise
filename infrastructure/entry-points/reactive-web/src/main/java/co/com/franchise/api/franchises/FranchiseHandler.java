@@ -3,6 +3,7 @@ package co.com.franchise.api.franchises;
 import co.com.franchise.api.dtos.requests.franchises.FranchiseRequest;
 import co.com.franchise.api.dtos.requests.stores.StoreRequest;
 import co.com.franchise.api.mapper.franchises.FranchiseMapper;
+import co.com.franchise.api.mapper.products.ProductMapper;
 import co.com.franchise.api.mapper.stores.StoreMapper;
 import co.com.franchise.usecase.franchises.services.FranchiseService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class FranchiseHandler {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final StoreMapper storeMapper;
+    private final ProductMapper productMapper;
 
     public Mono<ServerResponse> createFranchise(ServerRequest request) {
         return request.bodyToMono(FranchiseRequest.class)
@@ -41,6 +43,14 @@ public class FranchiseHandler {
                         ServerResponse.status(HttpStatus.CREATED)
                                 .bodyValue(response)
                 );
+    }
+
+    public Mono<ServerResponse> getMaxStockProductsByFranchise(ServerRequest request) {
+        String franchiseId = request.pathVariable("franchiseId");
+        return franchiseService.getMaxStockProductsByFranchise(franchiseId)
+                .map(productMapper::toResponseDetail)
+                .collectList()
+                .flatMap(list -> ServerResponse.ok().bodyValue(list));
     }
 
 

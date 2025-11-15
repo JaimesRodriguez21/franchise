@@ -9,5 +9,6 @@ public interface ProductRepository {
     Mono<Product> findProductByName(String name);
     Mono<Void> deleteProductProduct(Product product);
     Mono<Product> findProductByIdAndStoreId(String storeId, String productId);
+    Mono<Product> findMaxStockByStoreId(String storeId);
 
 }

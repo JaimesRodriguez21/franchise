@@ -7,4 +7,5 @@ public interface ProductService {
     Mono<Product> createProduct(Product product);
     Mono<Product> deleteProductByIdAndStoreId(String storeId, String productId);
     Mono<Product> updateProductByIdAndStoreId(String productId, String storeId, int newStock);
+    Mono<Product> findProductMaxStock(String storeId);
 }

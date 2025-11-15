@@ -51,4 +51,12 @@ public class ProductRepositoryAdapter extends AdapterOperations<Product, Product
         return repository.findProductDocumentByIdAndStoreId(productId, storeId)
                 .map(doc -> mapper.map(doc, Product.class));
     }
+
+    @Override
+    public Mono<Product> findMaxStockByStoreId(String storeId) {
+        return repository.findMaxStockByStoreId(storeId)
+                .map(doc -> mapper.map(doc, Product.class));
+    }
+
+
 }

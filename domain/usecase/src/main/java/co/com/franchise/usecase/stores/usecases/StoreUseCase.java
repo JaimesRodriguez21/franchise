@@ -1,5 +1,6 @@
 package co.com.franchise.usecase.stores.usecases;
 
+import co.com.franchise.model.objects.ProductWithStore;
 import co.com.franchise.model.product.Product;
 import co.com.franchise.model.store.Store;
 import co.com.franchise.model.store.gateways.StoreRepository;
@@ -8,6 +9,7 @@ import co.com.franchise.usecase.exceptions.BusinessException;
 import co.com.franchise.usecase.products.services.ProductService;
 import co.com.franchise.usecase.stores.services.StoreService;
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -43,6 +45,13 @@ public class StoreUseCase implements StoreService {
         return storeRepository.findById(storeId)
                 .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01STOR02)))
                 .flatMap(store -> productService.updateProductByIdAndStoreId(storeId, productId, newStock));
+    }
+
+    @Override
+    public Flux<ProductWithStore> findMaxStockProductByFranchiseId(String franchiseId) {
+        return storeRepository.findAllByFranchiseId(franchiseId)
+                .flatMap(store -> productService.findProductMaxStock(store.getId())
+                                .map(product -> new ProductWithStore(product, store)));
     }
 
 

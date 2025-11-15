@@ -5,6 +5,7 @@ import co.com.franchise.model.store.gateways.StoreRepository;
 import co.com.franchise.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -33,4 +34,11 @@ public class StoreRepositoryAdapter extends AdapterOperations<Store, StoreDocume
         return repository.findByNameIgnoreCase(name)
                 .map(doc -> mapper.map(doc, Store.class));
     }
+
+    @Override
+    public Flux<Store> findAllByFranchiseId(String id) {
+        return repository.findAllByFranchiseId(id)
+                .map(doc -> mapper.map(doc, Store.class));
+    }
+
 }

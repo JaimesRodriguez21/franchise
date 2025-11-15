@@ -40,6 +40,11 @@ public class ProductUseCase implements ProductService {
                 });
     }
 
+    @Override
+    public Mono<Product> findProductMaxStock(String storeId) {
+        return productRepository.findMaxStockByStoreId(storeId);
+    }
+
     private Mono<Void> validateUniqueProduct(String name) {
         return productRepository.findProductByName(name)
                 .flatMap(product -> Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS01)))

@@ -30,7 +30,8 @@ public class MongoRepositoryAdapter extends AdapterOperations<Franchise, Franchi
 
     @Override
     public Mono<Franchise> findFranchiseByName(String name) {
-        return repository.findByNameIgnoreCase(name);
+        return repository.findByNameIgnoreCase(name)
+                .map(franchise -> mapper.map(franchise, Franchise.class));
     }
 
 
