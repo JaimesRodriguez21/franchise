@@ -1,4 +1,4 @@
-package co.com.franchise.api.stores;
+package co.com.franchise.api.products;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +11,13 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Component
 @Configuration
-public class StoreRest {
+public class ProductRest {
 
     @Bean
-    public RouterFunction<ServerResponse> storeRoutes(StoreHandler handler) {
+    public RouterFunction<ServerResponse> productRoutes(ProductHandler handler) {
         return route()
-                .nest(path("/stores"), builder -> builder
-                        .PUT("/{storeId}", handler::updateStoreName)
-                        .POST("/{storeId}/products", handler::addProductToStore)
-                        .DELETE("/{storeId}/products/{productId}", handler::deleteProductFromStore)
-                )
+                .nest(path("/products"), builder -> builder
+                        .PUT("/{productId}", handler::updateProductStock))
                 .build();
     }
 }

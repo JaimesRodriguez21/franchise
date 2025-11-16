@@ -1,7 +1,6 @@
 package co.com.franchise.api.stores;
 
 import co.com.franchise.api.dtos.requests.products.ProductRequest;
-import co.com.franchise.api.dtos.requests.products.UpdStockRequest;
 import co.com.franchise.api.dtos.requests.stores.StoreRequest;
 import co.com.franchise.api.mapper.products.ProductMapper;
 import co.com.franchise.api.mapper.stores.StoreMapper;
@@ -43,18 +42,6 @@ public class StoreHandler {
                 .flatMap(response ->
                         ServerResponse.ok()
                                 .bodyValue(response)
-                );
-    }
-
-    public Mono<ServerResponse> updateProductStock(ServerRequest request) {
-        String storeId = request.pathVariable("storeId");
-        String productId = request.pathVariable("productId");
-
-        return request.bodyToMono(UpdStockRequest.class)
-                .flatMap(req -> storeService.updateProductStock(storeId, productId, req.getStock()))
-                .map(productMapper::toResponse)
-                .flatMap(response ->
-                        ServerResponse.ok().bodyValue(response)
                 );
     }
 

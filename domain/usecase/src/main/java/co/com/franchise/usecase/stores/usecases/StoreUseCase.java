@@ -42,13 +42,6 @@ public class StoreUseCase implements StoreService {
     }
 
     @Override
-    public Mono<Product> updateProductStock(String storeId, String productId, int newStock) {
-        return storeRepository.findById(storeId)
-                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01STOR02)))
-                .flatMap(store -> productService.updateProductByIdAndStoreId(storeId, productId, newStock));
-    }
-
-    @Override
     public Flux<ProductWithStore> findMaxStockProductByFranchiseId(String franchiseId) {
         return storeRepository.findAllByFranchiseId(franchiseId)
                 .flatMap(store -> productService.findProductMaxStock(store.getId())

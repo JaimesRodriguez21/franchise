@@ -31,8 +31,8 @@ public class ProductUseCase implements ProductService {
     }
 
     @Override
-    public Mono<Product> updateProductByIdAndStoreId(String productId, String storeId, int newStock) {
-        return productRepository.findProductByIdAndStoreId(productId, storeId)
+    public Mono<Product> updateProductStockById(String productId, int newStock) {
+        return productRepository.findById(productId)
                 .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS02)))
                 .flatMap(product -> {
                     product.setStock(newStock);

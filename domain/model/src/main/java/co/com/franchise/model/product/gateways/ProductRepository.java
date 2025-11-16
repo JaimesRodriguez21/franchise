@@ -4,6 +4,7 @@ import co.com.franchise.model.product.Product;
 import reactor.core.publisher.Mono;
 
 public interface ProductRepository {
+    Mono<Product> findById(String id);
     Mono<Product> createProduct(Product product);
     Mono<Product>  updateProduct(Product product);
     Mono<Product> findProductByName(String name);

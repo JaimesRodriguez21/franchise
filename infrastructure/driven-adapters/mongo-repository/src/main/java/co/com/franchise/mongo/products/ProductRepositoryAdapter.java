@@ -26,6 +26,12 @@ public class ProductRepositoryAdapter extends AdapterOperations<Product, Product
     }
 
     @Override
+    public Mono<Product> findById(String id) {
+        return repository.findById(id)
+                .map(doc -> mapper.map(doc, Product.class));
+    }
+
+    @Override
     public Mono<Product> createProduct(Product product) {
         return saveProduct(product);
     }
