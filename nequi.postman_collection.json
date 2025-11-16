@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "b6fd6fca-d9e3-48dd-8655-98fd86a084b2",
+		"name": "nequi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37234707"
+	},
+	"item": [
+		{
+			"name": "Franchise",
+			"item": [
+				{
+					"name": "createFranchise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Franquicia A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/franchises",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"franchises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addStoreToFrancheId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sucursal B\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/franchises/:id/stores",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"franchises",
+								":id",
+								"stores"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6918e5de9115226b2144e710"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findProductStoreMaxStock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/franchises/:franchiseId/max-stock-products",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"franchises",
+								":franchiseId",
+								"max-stock-products"
+							],
+							"variable": [
+								{
+									"key": "franchiseId",
+									"value": "6918c375410643b0c16b27f6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updFranchiseName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"name\": \"FranquiciA AA\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/franchises/:franchiseId/name",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"franchises",
+								":franchiseId",
+								"name"
+							],
+							"variable": [
+								{
+									"key": "franchiseId",
+									"value": "6918e5de9115226b2144e710"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stores",
+			"item": [
+				{
+					"name": "addProductToStoreId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tablet Xiaomi\",\r\n    \"stock\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/stores/:storeId/products",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"stores",
+								":storeId",
+								"products"
+							],
+							"variable": [
+								{
+									"key": "storeId",
+									"value": "6918cbf58b0586e5415ec9cc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProductoFromStoreid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/stores/:storeId/products/:productId",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"stores",
+								":storeId",
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "storeId",
+									"value": "6918e3872a0870195b65d3ee"
+								},
+								{
+									"key": "productId",
+									"value": "6918f1024f14867f41095949"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updStoreName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"SucursaL B\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/stores/:storeId/name",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"stores",
+								":storeId",
+								"name"
+							],
+							"variable": [
+								{
+									"key": "storeId",
+									"value": "6918e3872a0870195b65d3ee"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "updProductName",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tableta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev}}/products/:productId/name",
+							"host": [
+								"{{dev}}"
+							],
+							"path": [
+								"products",
+								":productId",
+								"name"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "69190c644f5232122cefa66a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updStockByProductId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stock\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/products/:productId/stock",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"products",
+								":productId",
+								"stock"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "6918f70b467cd38bacc582ab"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

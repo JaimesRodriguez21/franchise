@@ -56,7 +56,7 @@ Este proyecto está desplegado en AWS utilizando una instancia EC2  y se conecta
 ## Descripción
 
 - **EC2 Instance:** Máquina virtual de AWS donde corre la aplicación.
-- **Spring Boot:** La aplicación Java que expone la API REST.
+- **Spring WebFlux:** La aplicación Java que expone la API REST.
 - **MongoDB Atlas:** Cluster de base de datos en la nube al que se conecta la aplicación.
 
 
@@ -76,7 +76,7 @@ El proyecto utiliza varias propiedades y variables de configuración definidas e
   Todos los endpoints de la API están bajo `/api` gracias a `spring.webflux.base-path`. Por ejemplo, `/franchises` se expone como `/api/franchises`.
 
 - **MongoDB:**  
-  La conexión a MongoDB debe configurarse en `spring.data.mongodb.uri` según el entorno (local, desarrollo o producción).
+  La conexión a MongoDB debe configurarse en `spring.data.mongodb.uri` según el entorno.
 
 # Ejecución Paso a Paso (Modo Dockerizado)
 
@@ -120,6 +120,12 @@ Desde la raíz del proyecto (donde está el `docker-compose.yml`):
 ```bash
 docker compose down
 ```
+
+## Colección de Postman
+
+Puedes importar la colección de Postman para probar los endpoints de la API:
+
+👉 [Descargar colección Postman](nequi.postman_collection.json)
 
 
 # Servicios

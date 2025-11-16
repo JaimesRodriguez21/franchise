@@ -13,7 +13,7 @@ spring:
     include: null
   data:
     mongodb:
-      uri: "mongodb+srv://user:pxVBRiIOOyMMO4LQ@clustera.raasgjr.mongodb.net/franchise?retryWrites=true&w=majority"
+      uri: "example"
   webflux:
     base-path: "/api"
 management:
