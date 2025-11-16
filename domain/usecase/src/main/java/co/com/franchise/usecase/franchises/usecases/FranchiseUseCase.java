@@ -12,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 public class FranchiseUseCase implements FranchiseService {
-
-
     private final FranchiseRepository franchiseRepository;
     private final StoreService storeService;
 
@@ -42,6 +42,21 @@ public class FranchiseUseCase implements FranchiseService {
                 .flatMapMany(franchise -> storeService.findMaxStockProductByFranchiseId(franchise.getId()));
     }
 
+    @Override
+    public Mono<Franchise> updateFranchiseName(String franchiseId, String newName) {
+        return franchiseRepository.findById(franchiseId)
+                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01FRCH02)))
+                .flatMap(existingFranchise ->
+                        franchiseRepository.findFranchiseByName(newName)
+                                .flatMap(exists -> {
+                                    if (!Objects.equals(exists.getId(), existingFranchise.getId()) && !existingFranchise.getName().equals(newName)) {
+                                        return Mono.error(new BusinessException(ExceptionCodeEnum.C01FRCH03));
+                                    }
+                                    existingFranchise.setName(newName);
+                                    return franchiseRepository.updateFranchise(existingFranchise);
+                                })
+                );
+    }
 
     private Mono<Void> validateUniqueFranchise(String name) {
         return franchiseRepository.findFranchiseByName(name)

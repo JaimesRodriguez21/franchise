@@ -16,6 +16,7 @@ public class FranchiseRest {
                 .nest(path("/franchises"), builder -> builder
                         .POST("", handler::createFranchise)
                         .POST("/{franchiseId}/stores", handler::addStoreToFranchise)
+                        .PUT("/{franchiseId}", handler::updateFranchiseName)
                         .GET("/{franchiseId}", handler::getMaxStockProductsByFranchise)
                 )
                 .build();

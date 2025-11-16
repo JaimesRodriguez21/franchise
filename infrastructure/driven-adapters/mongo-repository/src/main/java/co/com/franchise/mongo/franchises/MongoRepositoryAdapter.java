@@ -9,8 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public class MongoRepositoryAdapter extends AdapterOperations<Franchise, FranchiseDocument, String, FranchiseDBRepository>
- implements FranchiseRepository
-{
+        implements FranchiseRepository {
 
     public MongoRepositoryAdapter(FranchiseDBRepository repository, ObjectMapper mapper) {
         /**
@@ -21,11 +20,20 @@ public class MongoRepositoryAdapter extends AdapterOperations<Franchise, Franchi
         super(repository, mapper, d -> mapper.map(d, Franchise.class));
     }
 
-    @Override
-    public Mono<Franchise> createFranchise(Franchise franchise) {
+    private Mono<Franchise> saveFranchise(Franchise franchise) {
         return repository
                 .save(mapper.map(franchise, FranchiseDocument.class))
                 .map(doc -> mapper.map(doc, Franchise.class));
+    }
+
+    @Override
+    public Mono<Franchise> createFranchise(Franchise franchise) {
+        return saveFranchise(franchise);
+    }
+
+    @Override
+    public Mono<Franchise> updateFranchise(Franchise franchise) {
+        return saveFranchise(franchise);
     }
 
     @Override
@@ -33,6 +41,7 @@ public class MongoRepositoryAdapter extends AdapterOperations<Franchise, Franchi
         return repository.findByNameIgnoreCase(name)
                 .map(franchise -> mapper.map(franchise, Franchise.class));
     }
+
 
 
 }

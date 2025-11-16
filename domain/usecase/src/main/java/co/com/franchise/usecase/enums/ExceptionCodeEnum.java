@@ -8,6 +8,8 @@ public enum ExceptionCodeEnum {
     // franchises
     C01FRCH01("C01FRCH01", "Franchise already exists"),
     C01FRCH02("C01FRCH02", "Franchise not found"),
+    C01FRCH03("C01FRCH03", "Franchise name already exists"),
+
 
     // stores
     C01STOR01("C01STOR01", "Store already exists"),

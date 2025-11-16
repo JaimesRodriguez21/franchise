@@ -10,4 +10,5 @@ public interface FranchiseService {
     Mono<Franchise> createFranchise(Franchise franchise);
     Mono<Store> addStoreToFranchise(String franchiseId, Store store);
     Flux<ProductWithStore> getMaxStockProductsByFranchise(String franchiseId);
+    Mono<Franchise> updateFranchiseName(String franchiseId, String newName);
 }
