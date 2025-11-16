@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class StoreMapper {
 
-
     public Store toDomain(StoreRequest request) {
         return Store.builder()
                 .name(request.getName())

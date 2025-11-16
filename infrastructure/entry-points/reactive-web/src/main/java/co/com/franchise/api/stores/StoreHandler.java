@@ -2,7 +2,9 @@ package co.com.franchise.api.stores;
 
 import co.com.franchise.api.dtos.requests.products.ProductRequest;
 import co.com.franchise.api.dtos.requests.products.UpdStockRequest;
+import co.com.franchise.api.dtos.requests.stores.StoreRequest;
 import co.com.franchise.api.mapper.products.ProductMapper;
+import co.com.franchise.api.mapper.stores.StoreMapper;
 import co.com.franchise.usecase.stores.services.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ public class StoreHandler {
 
     private final StoreService storeService;
     private final ProductMapper productMapper;
+    private final StoreMapper storeMapper;
 
     public Mono<ServerResponse> addProductToStore(ServerRequest request) {
         String storeId = request.pathVariable("storeId");
@@ -53,6 +56,15 @@ public class StoreHandler {
                 .flatMap(response ->
                         ServerResponse.ok().bodyValue(response)
                 );
+    }
+
+    public Mono<ServerResponse> updateStoreName(ServerRequest request) {
+        String storeId = request.pathVariable("storeId");
+
+        return request.bodyToMono(StoreRequest.class)
+                .flatMap(req -> storeService.updateStoreName(storeId, req.getName()))
+                .map(storeMapper::toResponse)
+                .flatMap(response -> ServerResponse.ok().bodyValue(response));
     }
 
 }

@@ -12,4 +12,5 @@ public interface StoreService {
     Mono<Product> deleteProductFromStore(String storeId, String productId);
     Mono<Product> updateProductStock(String storeId, String productId, int newStock);
     Flux<ProductWithStore> findMaxStockProductByFranchiseId(String storeId);
+    Mono<Store> updateStoreName(String storeId, String storeName);
 }

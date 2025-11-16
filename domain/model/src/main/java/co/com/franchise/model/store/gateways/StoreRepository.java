@@ -6,8 +6,8 @@ import reactor.core.publisher.Mono;
 
 public interface StoreRepository {
     Mono<Store> createStore(Store store);
+    Mono<Store> updateStore(Store store);
     Mono<Store> findById(String id);
     Mono<Store> findStoreByName(String name);
     Flux<Store> findAllByFranchiseId(String id);
-
 }

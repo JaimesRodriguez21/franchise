@@ -21,12 +21,20 @@ public class StoreRepositoryAdapter extends AdapterOperations<Store, StoreDocume
         super(repository, mapper, d -> mapper.map(d, Store.class));
     }
 
-
-    @Override
-    public Mono<Store> createStore(Store store) {
+    private Mono<Store> saveStore(Store store) {
         return repository
                 .save(mapper.map(store, StoreDocument.class))
                 .map(doc -> mapper.map(doc, Store.class));
+    }
+
+    @Override
+    public Mono<Store> createStore(Store store) {
+        return saveStore(store);
+    }
+
+    @Override
+    public Mono<Store> updateStore(Store store) {
+        return saveStore(store);
     }
 
     @Override
