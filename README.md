@@ -66,7 +66,51 @@ El proyecto utiliza varias propiedades y variables de configuración definidas e
 - **MongoDB:**  
   La conexión a MongoDB debe configurarse en `spring.data.mongodb.uri` según el entorno (local, desarrollo o producción).
 
-# API de Franquicias – Documentación de Servicios
+# Ejecución Paso a Paso (Modo Dockerizado)
+
+Este proyecto está dockerizado y puede ejecutarse localmente usando Docker Compose.
+
+## Requisitos
+
+- [Docker](https://www.docker.com/get-started) instalado
+- [Docker Compose](https://docs.docker.com/compose/install/) instalado
+- Puerto 8080 libre en tu máquina
+
+## Construir la imagen
+
+Desde la raíz del proyecto (donde está el `docker-compose.yml`):
+
+```bash
+docker compose up -d --build
+```
+
+## Levantar el contenedor
+
+Desde la raíz del proyecto (donde está el `docker-compose.yml`):
+
+```bash
+docker compose up -d
+```
+
+## Ver logs de la aplicación
+
+Para visualizar los logs en tiempo real del servicio levantado con Docker Compose, utiliza:
+
+```bash
+docker compose logs -f franchise-app
+```
+
+
+## Detener y eliminar los contenedores
+
+Desde la raíz del proyecto (donde está el `docker-compose.yml`):
+
+```bash
+docker compose down
+```
+
+
+# Servicios
 
 > **Nota:** Todas las rutas de los endpoints comienzan con el prefijo `/api`.  
 > Esto se debe a que en la configuración de WebFlux se definio como base `webflux.base-path: "/api"` en `application.yaml`,  

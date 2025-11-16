@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  franchise-app:
+    build:
+      dockerfile: Dockerfile
+    image: franchise:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
