@@ -17,7 +17,7 @@ public class StoreRest {
     public RouterFunction<ServerResponse> storeRoutes(StoreHandler handler) {
         return route()
                 .nest(path("/stores"), builder -> builder
-                        .PUT("/{storeId}", handler::updateStoreName)
+                        .PUT("/{storeId}/name", handler::updateStoreName)
                         .POST("/{storeId}/products", handler::addProductToStore)
                         .DELETE("/{storeId}/products/{productId}", handler::deleteProductFromStore)
                 )
