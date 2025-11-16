@@ -1,5 +1,6 @@
 package co.com.franchise.api.validators;
 
+import co.com.franchise.api.exception.IllegalArgumentException;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import jakarta.validation.ConstraintViolation;
@@ -14,6 +15,12 @@ public class ValidationUtil {
 
     public ValidationUtil(Validator validator) {
         this.validator = validator;
+    }
+
+    public <T> Mono<T> validateBody(Mono<T> bodyMono) {
+        return bodyMono
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("Request body is required")))
+                .flatMap(this::validate);
     }
 
     public <T> Mono<T> validate(T object) {

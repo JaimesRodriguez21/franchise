@@ -4,6 +4,7 @@ import co.com.franchise.api.dtos.requests.products.ProductRequest;
 import co.com.franchise.api.dtos.requests.utils.NameRequest;
 import co.com.franchise.api.mapper.products.ProductMapper;
 import co.com.franchise.api.mapper.stores.StoreMapper;
+import co.com.franchise.api.validators.ValidationUtil;
 import co.com.franchise.usecase.stores.services.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,14 @@ public class StoreHandler {
     private final StoreService storeService;
     private final ProductMapper productMapper;
     private final StoreMapper storeMapper;
+    private final ValidationUtil validationUtil;
 
     public Mono<ServerResponse> addProductToStore(ServerRequest request) {
         String storeId = request.pathVariable("storeId");
 
-        return request.bodyToMono(ProductRequest.class)
+        return validationUtil.validateBody(request.bodyToMono(ProductRequest.class))
                 .map(productMapper::toDomain)
+                .flatMap(validationUtil::validate)
                 .flatMap(product -> storeService.addProductToStore(storeId, product))
                 .map(productMapper::toResponse)
                 .flatMap(response ->
@@ -48,7 +51,8 @@ public class StoreHandler {
     public Mono<ServerResponse> updateStoreName(ServerRequest request) {
         String storeId = request.pathVariable("storeId");
 
-        return request.bodyToMono(NameRequest.class)
+        return validationUtil.validateBody(request.bodyToMono(NameRequest.class))
+                .flatMap(validationUtil::validate)
                 .flatMap(req -> storeService.updateStoreName(storeId, req.getName()))
                 .map(storeMapper::toResponse)
                 .flatMap(response -> ServerResponse.ok().bodyValue(response));
