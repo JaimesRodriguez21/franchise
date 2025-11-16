@@ -46,6 +46,18 @@ Este módulo es el más externo de la arquitectura, es el encargado de ensamblar
 
 **Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
 
+# Arquitectura del proyecto
+
+Este proyecto está desplegado en AWS utilizando una instancia EC2  y se conecta a un cluster de MongoDB Atlas.
+
+## Diagrama de despliegue
+![img.png](img.png)
+
+## Descripción
+
+- **EC2 Instance:** Máquina virtual de AWS donde corre la aplicación.
+- **Spring Boot:** La aplicación Java que expone la API REST.
+- **MongoDB Atlas:** Cluster de base de datos en la nube al que se conecta la aplicación.
 
 
 ## Configuración y Variables de Entorno
