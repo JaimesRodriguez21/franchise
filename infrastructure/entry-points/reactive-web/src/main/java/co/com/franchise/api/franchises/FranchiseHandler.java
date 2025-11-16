@@ -2,6 +2,7 @@ package co.com.franchise.api.franchises;
 
 import co.com.franchise.api.dtos.requests.franchises.FranchiseRequest;
 import co.com.franchise.api.dtos.requests.stores.StoreRequest;
+import co.com.franchise.api.dtos.requests.utils.NameRequest;
 import co.com.franchise.api.mapper.franchises.FranchiseMapper;
 import co.com.franchise.api.mapper.products.ProductMapper;
 import co.com.franchise.api.mapper.stores.StoreMapper;
@@ -56,7 +57,7 @@ public class FranchiseHandler {
     public Mono<ServerResponse> updateFranchiseName(ServerRequest request) {
         String franchiseId = request.pathVariable("franchiseId");
 
-        return request.bodyToMono(FranchiseRequest.class)
+        return request.bodyToMono(NameRequest.class)
                 .flatMap(req -> franchiseService.updateFranchiseName(franchiseId, req.getName()))
                 .map(franchiseMapper::toResponse)
                 .flatMap(response -> ServerResponse.ok().bodyValue(response));

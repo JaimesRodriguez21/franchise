@@ -45,6 +45,28 @@ public class ProductUseCase implements ProductService {
         return productRepository.findMaxStockByStoreId(storeId);
     }
 
+    @Override
+    public Mono<Product> updateProductName(String productId, String name) {
+        return productRepository.findById(productId)
+                .switchIfEmpty(Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS02)))
+                .flatMap(existingProduct ->
+                        productRepository.findProductByName(name)
+                                .flatMap(foundProduct -> {
+                                    if (!foundProduct.getId().equals(existingProduct.getId())) {
+                                        return Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS03));
+                                    }
+                                    existingProduct.setName(name);
+                                    return productRepository.updateProduct(existingProduct);
+                                })
+                                .switchIfEmpty(
+                                        Mono.defer(() -> {
+                                            existingProduct.setName(name);
+                                            return productRepository.updateProduct(existingProduct);
+                                        })
+                                )
+                );
+    }
+
     private Mono<Void> validateUniqueProduct(String name) {
         return productRepository.findProductByName(name)
                 .flatMap(product -> Mono.error(new BusinessException(ExceptionCodeEnum.C01PDTS01)))

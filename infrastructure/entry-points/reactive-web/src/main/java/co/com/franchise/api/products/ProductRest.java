@@ -17,7 +17,8 @@ public class ProductRest {
     public RouterFunction<ServerResponse> productRoutes(ProductHandler handler) {
         return route()
                 .nest(path("/products"), builder -> builder
-                        .PUT("/{productId}", handler::updateProductStock))
+                        .PUT("/{productId}", handler::updateProductName)
+                        .PUT("/{productId}/stock", handler::updateProductStock))
                 .build();
     }
 }

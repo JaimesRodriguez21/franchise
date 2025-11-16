@@ -1,6 +1,7 @@
 package co.com.franchise.api.products;
 
 import co.com.franchise.api.dtos.requests.products.UpdStockRequest;
+import co.com.franchise.api.dtos.requests.utils.NameRequest;
 import co.com.franchise.api.mapper.products.ProductMapper;
 import co.com.franchise.usecase.products.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,15 @@ public class ProductHandler {
                 .flatMap(response ->
                         ServerResponse.ok().bodyValue(response)
                 );
+    }
+
+    public Mono<ServerResponse> updateProductName(ServerRequest request) {
+        String productId = request.pathVariable("productId");
+
+        return request.bodyToMono(NameRequest.class)
+                .flatMap(req -> productService.updateProductName(productId, req.getName()))
+                .map(productMapper::toResponse)
+                .flatMap(response -> ServerResponse.ok().bodyValue(response));
     }
 
 
