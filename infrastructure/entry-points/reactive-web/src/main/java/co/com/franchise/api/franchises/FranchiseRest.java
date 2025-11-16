@@ -17,7 +17,7 @@ public class FranchiseRest {
                         .POST("", handler::createFranchise)
                         .POST("/{franchiseId}/stores", handler::addStoreToFranchise)
                         .PUT("/{franchiseId}", handler::updateFranchiseName)
-                        .GET("/{franchiseId}", handler::getMaxStockProductsByFranchise)
+                        .GET("/{franchiseId}/max-stock-products", handler::getMaxStockProductsByFranchise)
                 )
                 .build();
     }
